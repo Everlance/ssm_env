@@ -1,7 +1,11 @@
+require 'aws-sdk'
+
 module Fetcher
 
   def self.included(base)
     base.send :attr_reader, :ssm_params
+    extend ClassMethods
+    include InstanceMethods
   end
 
   module ClassMethods
@@ -13,10 +17,10 @@ module Fetcher
 
   module InstanceMethods
     def fetch(client:)
-      raise ArgumentError("Client is incompatable type #{client.class}") unless client.is_a?(Aws::SSM::Client)
+      raise ArgumentError.new("Client is incompatable type #{client.class}") unless client.is_a?(Aws::SSM::Client)
       batch_size = 10
-      params_list.each_slice(batch_size) do |params_slice|
-        response = self.client.get_parameters(names: params_slice.map(&:name), with_decryption: true)
+      @params_list.each_slice(batch_size) do |params_slice|
+        response = client.get_parameters(names: params_slice, with_decryption: true)
         # Transforms to { :name => { value: value, type: type } }
         response_params = Hash[response.parameters.map { |item| [item.name.to_sym, {value: item.value, type: item.type}] }]
         response_params.each do |name, attributes|
@@ -29,10 +33,8 @@ module Fetcher
   end
 
   def initialize(params_list: [])
-    params_list.each { Parameter.new(name: params_list.first.to_s) }
-
-    # Transforms to { :name => Parameter }
-    @params_list = Hash[params_list.map { |param| [param.to_sym, Parameter.new(name: param.to_s)] }]
+    @params_list = params_list
+    @ssm_params = {}
   end
 
 end

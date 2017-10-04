@@ -1,3 +1,4 @@
+$: << File.expand_path('./lib/ssm_env')
 require 'ostruct'
 require "ssm_env/version"
 require "ssm_env/fetcher"
