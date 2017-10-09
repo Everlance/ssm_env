@@ -10,7 +10,7 @@ RSpec.describe Fetcher do
   let(:params_list) do
     ['sample_param']
   end
-  subject(:fetcher) { fetcher_class.new(params_list: params_list) }
+  subject(:fetcher) { fetcher_class.new }
   before do
     allow(client).to receive(:is_a?).and_return(Aws::SSM::Client)
     allow(client_response).to receive(:parameters).and_return(response_parameters)
@@ -19,7 +19,7 @@ RSpec.describe Fetcher do
   context 'fetching parameters' do
     it 'queries the client for parameters' do
       expect(client).to receive(:get_parameters).with(names: params_list, with_decryption: true).and_return(client_response)
-      subject.fetch(client: client)
+      subject.fetch(client: client, params_list: params_list)
     end
   end
 end

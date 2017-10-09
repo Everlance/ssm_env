@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+require 'optparser'
+require 'ssm_env'
+require 'thor'
+require 'yaml'
+
+class SsmEnvCmd < Thor
+  include SsmEnv
+  desc 'show', 'show one or more variables'
+  method_option :input, aliases: '-i', required: true, banner: 'a string or filepath containing a list of params to pull from ssm'
+  def show
+    fetch_params_list
+    self.fetch(params_list: @params_list)
+  end
+
+  desc 'sync', 'store the environment in this process'
+  method_option :input, aliases: '-i', required: true, banner: 'a string or filepath containing a list of params to pull from ssm'
+  def sync
+    fetch_params_list
+    self.fetch(params_list: @params_list)
+    self.ssm_params.each do |name, attributes|
+      system({name => attributes[:value]})
+    end
+  end
+
+  private
+  def fetch_params_list
+    @params_list = []
+    p "Fetching parameters: #{@params_list}"
+    if File.exists?(options[:input])
+      @params_list = YAML.load(File.read(options[:input]))
+    elsif options[:input].is_a?(Array) || options[:input].is_a?(String)
+      @params_list = options[:input].to_s.split(',').to_a
+    else
+      raise ArgumentError.new("Invalid input provided #{options[:input]}")
+    end
+  end
+end
