@@ -1,7 +1,7 @@
 require 'aws-sdk'
 
 module Fetcher
-k
+
   def self.included(base)
     base.send :attr_accessor, :ssm_params
     base.send :include, InstanceMethods
