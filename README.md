@@ -1,9 +1,9 @@
 # SsmEnv
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ssm_env`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem is meant to fetch string and encrypted string parameters from AWS SSM and store them either in a file or in the local environment.
+## Pre Install
 
-TODO: Delete this and the text above, and describe your gem
-
+Ensure you have AWS access variables configured for use with the Ruby SDK, as defined in the V2 Ruby SDK Docs - http://docs.aws.amazon.com/sdkforruby/api/
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -22,7 +22,28 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+####Use this from the command line like 
+
+**Output Values**
+```
+ssm_env show -i "[BRANCH_KEY, VACUUM_RATE]"
+ssm_env show -i ssm_param_names.yml
+```
+
+**Synch your environment**
+```
+ssm_env sync -i "[BRANCH_KEY, VACUUM_RATE]"
+ssm_env sync -i ssm_param_names.yml
+```
+
+####Use this in ruby like 
+```
+ssm_env = SsmEnv.new.run(params_list: [BRANCH_KEY, VACUUM_LIMIT])
+# Update the environment
+ssm_env.to_env 
+# Store in a file
+ssm_env.to_file('/tmp/my_vars.env')
+```
 
 ## Development
 

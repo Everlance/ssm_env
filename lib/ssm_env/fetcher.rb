@@ -24,5 +24,4 @@ module Fetcher
       end
     end
   end
-
 end
