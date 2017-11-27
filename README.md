@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-####Use this from the command line like 
+#### Use this from the command line like 
 
 **Output Values**
 ```
@@ -36,7 +36,7 @@ ssm_env sync -i "[BRANCH_KEY, VACUUM_RATE]"
 ssm_env sync -i ssm_param_names.yml
 ```
 
-####Use this in ruby like 
+#### Use this in ruby like 
 ```
 ssm_env = SsmEnv.new.run(params_list: [BRANCH_KEY, VACUUM_LIMIT])
 # Update the environment
@@ -53,5 +53,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ssm_env.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Everlance/ssm_env.
 
