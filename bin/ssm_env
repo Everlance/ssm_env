@@ -5,20 +5,20 @@ require 'thor'
 require 'yaml'
 
 class SsmEnvCmd < Thor
-  include SsmEnv
   desc 'show', 'show one or more variables'
   method_option :input, aliases: '-i', required: true, banner: 'a string or filepath containing a list of params to pull from ssm'
   def show
     fetch_params_list
-    self.fetch(params_list: @params_list)
+    SsmEnv.fetch(params_list: @params_list)
   end
 
   desc 'sync', 'store the environment in this process'
   method_option :input, aliases: '-i', required: true, banner: 'a string or filepath containing a list of params to pull from ssm'
   def sync
     fetch_params_list
-    self.fetch(params_list: @params_list)
-    self.ssm_params.each do |name, attributes|
+    params = SsmEnv.fetch(params_list: @params_list)
+    SsmEnv.to_env(ssm_params: params)
+    params.each do |name, attributes|
       system({name => attributes[:value]})
     end
   end
