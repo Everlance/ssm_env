@@ -23,6 +23,19 @@ class SsmEnvCmd < Thor
     end
   end
 
+  desc 'save', 'save the environment variables to a env file'
+  method_option :input, aliases: '-i', required: true, banner: 'a string or filepath'
+  method_option :path, aliases: '-p', required: true, banner: 'path to the env file'
+  def save
+    fetch_params_list
+    params = SsmEnv.fetch(params_list: @params_list)
+    File.open(File.expand_path(options[:path]), 'w') do |file|
+      params.each do |name, attributes|
+        file << "#{name}=#{attributes[:value]}\n"
+      end
+    end
+  end
+
   private
   def fetch_params_list
     @params_list = []

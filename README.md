@@ -36,6 +36,12 @@ ssm_env sync -i "[BRANCH_KEY, VACUUM_RATE]"
 ssm_env sync -i ssm_param_names.yml
 ```
 
+**Store your environment**
+```
+ssm_env save -p .env -i "[BRANCH_KEY, VACUUM_RATE]"
+ssm_env save -p .env -i ssm_param_names.yml
+```
+
 #### Use this in ruby like 
 ```
 ssm_env = SsmEnv.new.run(params_list: [BRANCH_KEY, VACUUM_LIMIT])
