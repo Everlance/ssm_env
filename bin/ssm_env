@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require 'optparser'
+$: << File.expand_path('./lib')
 require 'ssm_env'
 require 'thor'
 require 'yaml'
