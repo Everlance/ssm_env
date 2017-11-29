@@ -26,19 +26,19 @@ Or install it yourself as:
 
 **Output Values**
 ```
-ssm_env show -i "[BRANCH_KEY, VACUUM_RATE]"
+ssm_env show -i "BRANCH_KEY,VACUUM_RATE"
 ssm_env show -i ssm_param_names.yml
 ```
 
 **Synch your environment**
 ```
-ssm_env sync -i "[BRANCH_KEY, VACUUM_RATE]"
+ssm_env sync -i "BRANCH_KEY,VACUUM_RATE"
 ssm_env sync -i ssm_param_names.yml
 ```
 
 **Store your environment**
 ```
-ssm_env save -p .env -i "[BRANCH_KEY, VACUUM_RATE]"
+ssm_env save -p .env -i "BRANCH_KEY,VACUUM_RATE"
 ssm_env save -p .env -i ssm_param_names.yml
 ```
 

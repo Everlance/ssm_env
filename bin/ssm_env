@@ -9,7 +9,10 @@ class SsmEnvCmd < Thor
   method_option :input, aliases: '-i', required: true, banner: 'a string or filepath containing a list of params to pull from ssm'
   def show
     fetch_params_list
-    SsmEnv.fetch(params_list: @params_list)
+    params = SsmEnv.fetch(params_list: @params_list)
+    params.each do |name, attributes|
+      puts "#{name} = #{attributes[:value]}"
+    end
   end
 
   desc 'sync', 'store the environment in this process'
@@ -39,7 +42,6 @@ class SsmEnvCmd < Thor
   private
   def fetch_params_list
     @params_list = []
-    p "Fetching parameters: #{@params_list}"
     if File.exists?(options[:input])
       @params_list = YAML.load(File.read(options[:input]))
     elsif options[:input].is_a?(Array) || options[:input].is_a?(String)
@@ -49,3 +51,5 @@ class SsmEnvCmd < Thor
     end
   end
 end
+
+SsmEnvCmd.start(ARGV)
