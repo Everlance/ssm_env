@@ -34,7 +34,7 @@ class SsmEnvCmd < Thor
     params = SsmEnv.fetch(params_list: @params_list)
     File.open(File.expand_path(options[:path]), 'w') do |file|
       params.each do |name, attributes|
-        file << "#{name}=#{attributes[:value]}\n"
+        file << "export #{name}=#{attributes[:value]}\n"
       end
     end
   end
