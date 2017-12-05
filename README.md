@@ -78,6 +78,7 @@ param_names = [
 ]
 
 # NOTE: you can provide access_key_id and secret_access_key for local development (you can use a gem such as dotenv to have these credentials in a .env file that is not committed to source code)
+# You could also omit access_key_id and secret_access_key, but make sure they are exported in your ~/.profile as ENV variables
 ssm_params = SsmEnv.fetch(
   params_list: param_names,
   access_key_id: ENV['LOCAL_DEV_AWS_ACCESS_KEY_ID'],
