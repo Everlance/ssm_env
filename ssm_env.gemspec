@@ -8,6 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = SsmEnv::VERSION
   spec.authors       = ["Rob Lane"]
   spec.email         = ["rob@everlance.com"]
+  spec.license       = 'MIT'
 
   spec.summary       = "Synchronize your AWS SSM parameters to your environment"
 
