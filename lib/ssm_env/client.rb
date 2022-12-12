@@ -1,4 +1,4 @@
-require 'aws-sdk'
+require 'aws-sdk-ssm'
 
 class Client
   def self.get_client(region: 'us-east-1', access_key_id: , secret_access_key: )

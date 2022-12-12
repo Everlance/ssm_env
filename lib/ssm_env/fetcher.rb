@@ -1,4 +1,4 @@
-require 'aws-sdk'
+require 'aws-sdk-ssm'
 
 module SsmEnv
   class Fetcher
