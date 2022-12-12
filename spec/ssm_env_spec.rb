@@ -45,7 +45,7 @@ describe SsmEnv do
     let(:client) { double(:client) }
     it 'creates a client with the correct config' do
       expect(Client).to receive(:get_client).with(config).and_return(client)
-      SsmEnv.client
+      SsmEnv.client(config[:access_key_id], config[:secret_access_key])
     end
   end
   context '.config' do
