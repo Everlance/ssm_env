@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.executables << 'ssm_env'
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "aws-sdk-ssm", "~> 3.0"
+  spec.add_runtime_dependency "aws-sdk-ssm", "~> 1.148"
   spec.add_runtime_dependency "thor", "~> 1.1"
 
   spec.add_development_dependency "bundler", "~> 1.11"
