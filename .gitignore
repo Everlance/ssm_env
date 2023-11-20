@@ -8,3 +8,6 @@
 /spec/reports/
 /tmp/
 .idea/
+
+# Running the test suite generates this file:
+/test-env
