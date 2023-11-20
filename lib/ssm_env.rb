@@ -17,7 +17,7 @@ module SsmEnv
       ssm_params.each { |name, attribs| f << "#{name}=#{attribs[:value]}\n"}
     end
   end
-  def self.client(access_key_id, secret_access_key)
+  def self.client(access_key_id = nil, secret_access_key = nil)
     @client = Client.get_client(region:             SsmEnv.config.region,
                                 access_key_id:      access_key_id || SsmEnv.config.access_key_id,
                                 secret_access_key:  secret_access_key || SsmEnv.config.secret_access_key)
